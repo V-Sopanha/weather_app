@@ -4,8 +4,11 @@ import { WeatherData, ForecastData } from '../types/weather';
 // OpenWeatherMap API base URL
 const API_BASE_URL = 'https://api.openweathermap.org/data/2.5';
 
-// This would typically be stored in an environment variable
-const API_KEY = '435e4fb5909ae47a55e52ed57878e30b'; // Users would replace this with their actual API key
+const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
+
+if (!API_KEY) {
+  throw new Error('Weather API key not found. Please add VITE_WEATHER_API_KEY to your .env file.');
+}
 
 // Create an axios instance
 const weatherApi = axios.create({
